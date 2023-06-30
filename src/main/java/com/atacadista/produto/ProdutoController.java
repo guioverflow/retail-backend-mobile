@@ -54,6 +54,7 @@ public class ProdutoController {
                         HttpStatus.NOT_FOUND, "Produto não encontrado com ID: " + id
                 ));
 
+        produtoBean.setGTIN(ProdutoRequestDTO.GTIN());
         produtoBean.setNome(ProdutoRequestDTO.Nome());
         produtoBean.setQuantidade(ProdutoRequestDTO.Quantidade());
         produtoBean.setPreco(ProdutoRequestDTO.Preco());

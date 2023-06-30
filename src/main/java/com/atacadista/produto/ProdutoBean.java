@@ -9,15 +9,18 @@ import lombok.*;
 @Table(name = "Produtos", schema = "public")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "GTIN")
+@EqualsAndHashCode(of = "IdProduto")
 public class ProdutoBean {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idproduto")
+    public Integer IdProduto;
     public Long GTIN;
     public String Nome;
     public Integer Quantidade;
     public Float Preco;
 
     public ProdutoBean(ProdutoRequestDTO data) {
+        this.GTIN = data.GTIN();
         this.Nome = data.Nome();
         this.Quantidade = data.Quantidade();
         this.Preco = data.Preco();

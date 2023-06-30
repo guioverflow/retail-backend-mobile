@@ -2,6 +2,7 @@ package com.atacadista.usuario;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.ComponentScan;
 
 @Getter
 @Setter
@@ -11,8 +12,11 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "IdUsuario")
 public class UsuarioBean {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "idusuario") @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer IdUsuario;
+
+    @Column(name = "nivelacesso")
     public Integer NivelAcesso;
     public Boolean Ativo;
     public String Usuario;
