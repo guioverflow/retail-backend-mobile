@@ -42,6 +42,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token not provided");
             return;
         }
+
         String username = tokenService.validateToken(token);
 
         if (username == null) {
