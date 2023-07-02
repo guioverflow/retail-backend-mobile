@@ -1,13 +1,12 @@
 package com.atacadista.usuario;
 
-public record UsuarioResponseDTO(Integer IdUsuario, Integer NivelAcesso, Boolean Ativo, String Usuario, String Hash) {
-    public UsuarioResponseDTO(UsuarioBean usuarioBean) {
+public record UsuarioResponseDTO(Integer IdUsuario, UsuarioRole role, String username, String password) {
+    public UsuarioResponseDTO(Usuario usuario) {
         this(
-                usuarioBean.getIdUsuario(),
-                usuarioBean.getNivelAcesso(),
-                usuarioBean.getAtivo(),
-                usuarioBean.getUsuario(),
-                usuarioBean.getHash()
+                usuario.getIdUsuario(),
+                usuario.getRole(),
+                usuario.getUsername(),
+                usuario.getPassword()
         );
     }
 }

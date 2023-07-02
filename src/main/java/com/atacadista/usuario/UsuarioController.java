@@ -18,7 +18,7 @@ public class UsuarioController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public void insert(@RequestBody UsuarioRequestDTO data) {
-        UsuarioBean usuarioData = new UsuarioBean(data);
+        Usuario usuarioData = new Usuario(data);
         repository.save(usuarioData);
     }
 
@@ -34,11 +34,11 @@ public class UsuarioController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{id}")
     public UsuarioResponseDTO selectById(@PathVariable Integer id) {
-        UsuarioBean usuarioBean = repository.findById(id)
+        Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Funcionario não encontrado com ID: " + id
                 ));
-        return new UsuarioResponseDTO(usuarioBean);
+        return new UsuarioResponseDTO(usuario);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -49,18 +49,16 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public UsuarioResponseDTO update(@PathVariable Integer id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        UsuarioBean usuarioBean = repository.findById(id)
+        Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Funcionario não encontrado com ID: " + id
                 ));
 
+        usuario.setRole(usuarioRequestDTO.role());
+        usuario.setUsername(usuarioRequestDTO.username());
+        usuario.setPassword(usuarioRequestDTO.password());
 
-        usuarioBean.setNivelAcesso(usuarioRequestDTO.NivelAcesso());
-        usuarioBean.setAtivo(usuarioRequestDTO.Ativo());
-        usuarioBean.setUsuario(usuarioRequestDTO.Usuario());
-        usuarioBean.setHash(usuarioRequestDTO.Hash());
-
-        UsuarioBean updatedFuncionario = repository.save(usuarioBean);
+        Usuario updatedFuncionario = repository.save(usuario);
 
         return new UsuarioResponseDTO(updatedFuncionario);
     }

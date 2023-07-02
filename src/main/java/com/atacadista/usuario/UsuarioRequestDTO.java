@@ -1,4 +1,4 @@
 package com.atacadista.usuario;
 
-public record UsuarioRequestDTO(Integer NivelAcesso, Boolean Ativo, String Usuario, String Hash) {
+public record UsuarioRequestDTO(UsuarioRole role, String username, String password) {
 }
