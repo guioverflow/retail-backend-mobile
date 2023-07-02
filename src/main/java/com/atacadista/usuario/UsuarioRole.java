@@ -1,5 +1,7 @@
 package com.atacadista.usuario;
 
+
+// Armazena as possíveis roles do sistema.
 public enum UsuarioRole {
     ADMIN("admin"),
     USER("user");

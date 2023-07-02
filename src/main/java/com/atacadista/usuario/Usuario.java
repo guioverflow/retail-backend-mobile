@@ -28,9 +28,7 @@ public class Usuario implements UserDetails {
     public String password;
 
     public Usuario(UsuarioRequestDTO Data) {
-        this.role = Data.role();
         this.username = Data.username();
-        this.password = Data.password();
     }
 
     public Usuario(String username, String password, UsuarioRole usuarioRole) {

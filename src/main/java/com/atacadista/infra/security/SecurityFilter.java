@@ -40,7 +40,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (token == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Token não fornecida");
+            response.getWriter().write("Token nao fornecida");
             return;
         }
 
@@ -48,14 +48,14 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (username == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Token inválida");
+            response.getWriter().write("Token invalida");
             return;
         }
         UserDetails user = usuarioRepository.findByUsername(username);
 
         if (user == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Usuário não encontrado");
+            response.getWriter().write("Usuario não encontrado");
             return;
         }
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

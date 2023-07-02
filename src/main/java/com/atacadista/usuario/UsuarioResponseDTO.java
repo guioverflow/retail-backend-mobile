@@ -1,12 +1,12 @@
 package com.atacadista.usuario;
 
-public record UsuarioResponseDTO(Integer IdUsuario, UsuarioRole role, String username, String password) {
+// Objeto representando as informações contidas numa Response de usuário
+public record UsuarioResponseDTO(Integer IdUsuario, UsuarioRole role, String username) {
     public UsuarioResponseDTO(Usuario usuario) {
         this(
                 usuario.getIdUsuario(),
                 usuario.getRole(),
-                usuario.getUsername(),
-                usuario.getPassword()
+                usuario.getUsername()
         );
     }
 }

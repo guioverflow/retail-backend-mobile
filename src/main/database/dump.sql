@@ -1,4 +1,5 @@
 
+-- Criação da tabela produtos
 CREATE TABLE Produtos (
 	IdProduto SERIAL PRIMARY KEY,
     GTIN bigint,
@@ -7,15 +8,25 @@ CREATE TABLE Produtos (
     Preco float
 );
 
+
+-- Criação da tabela usuários
 CREATE TABLE Usuarios (
     IdUsuario SERIAL PRIMARY KEY,
-    NivelAcesso integer,
-    Ativo boolean,
-    Usuario varchar(50),
-    Hash varchar(256)
+    Role varchar(30),
+    Username varchar(30),
+    Password varchar(200)
 );
 
--- Inserts para tabela Produtos
+
+-- Inserção de usuários default do sistema
+INSERT INTO Usuarios VALUES ('0', 'admin', '$2a$10$s/84Y7eDUHe.0jE2QijzQ.g4e0w/rTHSFlzOqM7NNBHaJZTJ6Npoy')
+INSERT INTO Usuarios VALUES ('1', 'user', '$2a$10$i1Kveo5wHrI4LG5XJidB8.UNXpaLgHugl1JyDIz5OvY6XS/a5kXe.')
+INSERT INTO Usuarios VALUES ('0', 'gui', '$2a$10$gn3pCmqcgGsfNlRrMwlgwuhZFodP8uVfgaRGjdbgex34FC0ylsaqK')
+INSERT INTO Usuarios VALUES ('0', 'falk', '$2a$10$HXbfdLr8trGp3r8OZI/gx.i0m0XVXYC7T0JDRzLu15wCem5Hu4Rx2')
+INSERT INTO Usuarios VALUES ('0', 'thiago', '$2a$10$8qtktGWtZIwJakHxEnzpxuyObl3b2LhkSakDyd0JlP3OGLhexNmw.')
+
+
+-- Inserção de produtos genéricos no banco
 INSERT INTO Produtos (GTIN, Nome, Quantidade, Preco) VALUES (7891234567890, 'Arroz Parboilizado 5kg', 50, 29.90);
 INSERT INTO Produtos (GTIN, Nome, Quantidade, Preco) VALUES (7894561237890, 'Feijão Carioca 1kg', 100, 7.99);
 INSERT INTO Produtos (GTIN, Nome, Quantidade, Preco) VALUES (7897894567890, 'Açúcar Cristal 2kg', 80, 6.50);

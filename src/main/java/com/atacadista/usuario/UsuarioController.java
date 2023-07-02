@@ -2,9 +2,12 @@ package com.atacadista.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +20,17 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
-    public void insert(@RequestBody UsuarioRequestDTO data) {
-        Usuario usuarioData = new Usuario(data);
-        repository.save(usuarioData);
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+
+        if (repository.findByUsername(data.username()) != null)
+            return ResponseEntity.badRequest().build();
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        Usuario novoUsuario = new Usuario(data.username(), encryptedPassword, data.role());
+
+        this.repository.save(novoUsuario);
+
+        return ResponseEntity.ok().build();
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -45,21 +56,5 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         repository.deleteById(id);
-    }
-
-    @PutMapping("/{id}")
-    public UsuarioResponseDTO update(@PathVariable Integer id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Funcionario não encontrado com ID: " + id
-                ));
-
-        usuario.setRole(usuarioRequestDTO.role());
-        usuario.setUsername(usuarioRequestDTO.username());
-        usuario.setPassword(usuarioRequestDTO.password());
-
-        Usuario updatedFuncionario = repository.save(usuario);
-
-        return new UsuarioResponseDTO(updatedFuncionario);
     }
 }

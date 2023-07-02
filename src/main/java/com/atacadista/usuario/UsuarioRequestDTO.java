@@ -1,4 +1,5 @@
 package com.atacadista.usuario;
 
-public record UsuarioRequestDTO(UsuarioRole role, String username, String password) {
+// Objeto representando as informações necessárias em uma request de usuário
+public record UsuarioRequestDTO(String username) {
 }
