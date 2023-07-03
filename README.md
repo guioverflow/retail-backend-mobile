@@ -156,13 +156,16 @@ A aplicação está separada em uma estrutura bem definida de pastas e packages:
 
 # Uso da API
 
-Todas as requisições devem ser feitas com um Bearer token de autorização no cabeçalho da requisição. A única exceção da regra é a URI de login, que gera essa token.
+Todas as requisições devem ser feitas com um `Bearer Token` no cabeçalho `Authorization` da requisição. A única exceção da regra é a URI de login, responsável pela criação dessa token.
+
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/e2fe2278-7f51-49e7-b330-30f8d700c9b7)
+
 
 ## Verbos
 
 - `POST /auth/login`
 
-Usuários e senha enviados no body, retorna uma token que será utilizada em todas as requisições do sistema. Qualquer usuário, autenticado ou não, tem acesso à esta rota.
+Usuários e senha enviados no body, retorna uma token que será utilizada em todas as requisições do sistema. Essa token tem duração de 2 horas, após esse período, a autenticação expira. Qualquer usuário, autenticado ou não, tem acesso à esta rota.
 
 ![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/6b9cd41a-bcd2-4b35-9b62-3c56bc3f36eb)
 
@@ -196,19 +199,32 @@ Faz a atualização completa de um produto no banco. É necessário estar autent
 
 Faz a exclusão de um produto no banco. É necessário estar autenticado com nível de acesso "USER".
 
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/c5e2fabb-7df7-4044-9d2c-5ee24204b299)
+
+
 `GET /usuarios`:
 
 Retorna uma lista de todos os usuários. Necessário estar autenticado com nível de acesso "ADMIN".
+
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/70be1ecd-2224-4654-8da0-ec4fefb0e92a)
 
 `GET /usuarios/{id}`:
 
 Retorna dados do usuário com o id especificado. Necessário estar autenticado com nível de acesso "ADMIN".
 
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/b91e22dd-0309-465d-a0e3-cb384e005021)
+
 `POST /usuarios`:
 
 Faz a inserção de um novo usuário no banco. É necessário estar autenticado com nível de acesso "ADMIN" e enviar no body um JSON contendo informações do usuário.
 
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/99a56a2b-bd3e-4469-af5e-ff21c72c214d)
+
+
 `DELETE /usuarios/{id}`:
 
 Faz a exclusão de um usuário no banco. É necessário estar autenticado com nível de acesso "ADMIN".
+
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/769d31bf-86f3-4a69-ae19-f18b033fc1f0)
+
 
