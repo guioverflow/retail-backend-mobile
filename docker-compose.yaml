@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: db_estoque
+    volumes:
+      - ./database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - 5432:5432
+
+  retail-backend:
+    image: openjdk:17
+    volumes:
+      - ./app/retail-backend.jar:/app/retail-backend.jar
+    ports:
+      - 8080:8080
+    command: ["java", "-jar", "/app/retail-backend.jar"]
+    depends_on:
+      - db
