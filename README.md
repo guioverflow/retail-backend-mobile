@@ -26,11 +26,19 @@ Para prosseguir com o levantamento de ambiente, deve-se ter, previamente, o segu
 
 `docker-compose -f .\database\docker-compose.yaml up -d`
 
-2 - Em seguida o comando
+2 - Em seguida, executar o comando para levantar a aplicação.
 
 `docker-compose -f .\app\docker-compose.yaml up -d`
 
-Observação: No Windows é necessário estar com aplicativo do Docker aberto.
+Observações:
+
+1 - No Windows é necessário estar com aplicativo do Docker aberto.
+
+2 - Necessário executar primeiro o banco, e depois a aplicação.
+
+3 - Necessário estar com a porta 8080 liberada, caso contrário, a aplicação não poderá ser executada.
+
+![image](https://github.com/guioverflow/retail-backend-mobile/assets/84868817/21f14d24-8e50-44f5-80d6-80c0884ee3ba)
 
 ## Com instalação de softwares local
 
